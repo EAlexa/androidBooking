@@ -21,6 +21,13 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import org.w3c.dom.Document;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 public class FinalViewActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -156,5 +163,14 @@ public class FinalViewActivity extends AppCompatActivity {
                         }
                     }
                 });
+
+        calculate();
+    }
+
+    public void calculate() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        OffsetDateTime date = LocalDateTime.parse(LocalDate.now().toString(), dtf).atOffset(ZoneOffset.UTC);
+
+        Log.d("Date: ", " " + date);
     }
 }
